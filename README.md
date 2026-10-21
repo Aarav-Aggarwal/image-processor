@@ -31,7 +31,9 @@ Output: on the spiky test image, the single 255 pixel spreads into its 8 neighbo
 
 ## Border handling
 Border pixels are left unchanged, because they do not have a full 3x3 neighborhood.
-This is simple and keeps the image size the same. The downside is that the outer edge is not blurred.## How to run
+This is simple and keeps the image size the same. The downside is that the outer edge is not blurred.
+
+## How to run
 python image_processor.py
 
 ## Extra test images
