@@ -95,9 +95,12 @@ print("\nOriginal Image:")
 print_image(image)
 print("\nCropped (rows 1-3, columns 1-3):")
 print_image(crop(image, 1, 4, 1, 4))
+#note: You need to add +1 to the right limit of the crop function to get the desired right side column number.
+
+
 ############################################################################################
 
-#Bluriing the image by averaging the values of each pixel with its neighbors.
+#Blurring the image by averaging the values of each pixel with its neighbors.
 def blur_image(image):
     result = []
     for row in image:
@@ -132,8 +135,8 @@ print("\nBlurred Spiky Image:")
 print_image(blur_image(spiky))
 
 #The function is not defined for edges because the edges dont have a 3x3 matrix around them.
-#So they are left untouched as is and code is only aplied for the ones that can be solved.
-#The disadvantage of this is that the edges will note blur at all.
+#So they are left untouched as is and code is only applied for the ones that can be solved.
+#The disadvantage of this is that the edges will not blur at all.
 
 #########################################################################################################
 
@@ -162,3 +165,67 @@ def invert_rgb_image(image):
     return result
 print("\nInverted RGB Image:")
 print_rgb_image(invert_rgb_image(rgb_image))
+##################################################################
+
+def ascii_art(image):
+    ascii_chars = [' ', '.', ':', '-', '=', '+', '*', '#', '%', '@']
+    result = []
+    for row in image:
+        new_row = []
+        for value in row:
+            index = value * 9 // 255
+            new_row.append(ascii_chars[index])
+        result.append(new_row)
+    return result
+
+print("\nOriginal Image:")
+print_image(image)
+print("\nASCII Art:")
+print_image(ascii_art(image))
+
+#####################################################################################
+
+def print_ascii(image):
+    for row in image:
+        print("".join(row))
+
+#####################################################################################
+
+import random
+
+random.seed(1)
+
+big_image = []
+for r in range(100):
+    row = []
+    for c in range(100):
+        row.append(random.randint(0, 255))
+    big_image.append(row)
+
+print("\nASCII Art of Big Image:")
+print_ascii(ascii_art(big_image))
+
+###########################################################################################
+
+from PIL import Image
+
+img = Image.open(r"C:\Users\Aarav\OneDrive\Desktop\Python Learning\Photos\photo.webp")
+gray = img.convert("L")
+
+width = 80
+ratio = gray.width / gray.height
+height = int(width * ratio * 0.5)
+gray = gray.resize((width, height))
+
+new_image = []
+for r in range(gray.height):
+    row = []
+    for c in range(gray.width):
+        row.append(gray.getpixel((c, r)))
+    new_image.append(row)
+
+print("\nASCII Art of Imported Image:")
+print_ascii(ascii_art(new_image))
+gray.show()
+
+#####################################################################################
