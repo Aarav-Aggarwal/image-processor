@@ -33,9 +33,6 @@ Output: on the spiky test image, the single 255 pixel spreads into its 8 neighbo
 Border pixels are left unchanged, because they do not have a full 3x3 neighborhood.
 This is simple and keeps the image size the same. The downside is that the outer edge is not blurred.
 
-## How to run
-python image_processor.py
-
 ## Extra test images
 A second image with one bright pixel (spiky) is used for blur, because the gradient image looks the same after blur.
 
@@ -44,6 +41,13 @@ An RGB image is a grid where each pixel is [R, G, B].
 ### invert_rgb_image(image)
 Replaces each of the three channels of every pixel with 255 minus its value.
 Output: red (255,0,0) becomes (0,255,255), and black becomes white.
+
+### ascii_art(image) (bonus)
+Turns each pixel into a text character, from light to heavy: ' .:-=+*#%@'. Brighter pixels get heavier characters.
+Output: 0 becomes a space, 50 becomes '.', and 200 becomes '#'.
+
+### Importing a photo (bonus)
+Uses Pillow only to open the file and convert it to grayscale. The pixel grid, resizing logic and ASCII conversion are done in plain Python.
 
 ## Note
 Every function returns a new image and does not change the original.
